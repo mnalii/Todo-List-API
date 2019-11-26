@@ -1,0 +1,540 @@
+{
+	"info": {
+		"_postman_id": "6a2dc0e8-ecf8-47c6-a5ac-64fb2ce36d95",
+		"name": "Todo List API",
+		"description": "Todo List API with user authentication, CRUD and sending email functionality\n\nFor more in depth docs with sample requests, visit the <a href=\"https://documenter.getpostman.com/view/8858534/SW7dX7JG?version=latest\" target=\"_blank\">Postman Doc</a>\n\nUse <b>https://api-nodejs-todolist.herokuapp.com</b> as the {{ url }} for all endpoints",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Register User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Muhammad Nur Ali\",\n\t\"email\": \"muh.nurali43@gmail.com\",\n\t\"password\": \"12345678\",\n\t\"age\": 20\n}"
+						},
+						"url": {
+							"raw": "{{url}}/user/register",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"register"
+							]
+						},
+						"description": "Register new user and save it to database"
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"muh.nurali43@gmail.com\",\n\t\"password\": \"12345678\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/user/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"login"
+							]
+						},
+						"description": "Logged in to registered user account"
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZGRiZGQxM2JiMjIzZTEyMjY5NzMxMmEiLCJpYXQiOjE1NzQ2OTEwNDl9.R4sJr3wnoiG_HwKT3to40u6Z1b_CiClH66sJZRRj9bA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/user/logout",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"logout"
+							]
+						},
+						"description": "Logged out the user and clear token from database"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Logged In User via Token",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZGRjY2JlYzZiNTVkYTAwMTc1OTcyMmMiLCJpYXQiOjE1NzQ3NTE2ODh9.GPbsl9FLX4VrsGVErodiXypjuz1us4tfD0jwg2_UrzY",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/user/me",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"me"
+							]
+						},
+						"description": "Fetch user profile that logged in, authorization needed"
+					},
+					"response": []
+				},
+				{
+					"name": "Update User Profile",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZGRjY2JlYzZiNTVkYTAwMTc1OTcyMmMiLCJpYXQiOjE1NzQ3NTE2ODh9.GPbsl9FLX4VrsGVErodiXypjuz1us4tfD0jwg2_UrzY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"age\": 25\n}"
+						},
+						"url": {
+							"raw": "{{url}}/user/me",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"me"
+							]
+						},
+						"description": "Update logged in user profile and save it to database"
+					},
+					"response": []
+				},
+				{
+					"name": "Upload Image",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZGRjY2JlYzZiNTVkYTAwMTc1OTcyMmMiLCJpYXQiOjE1NzQ3NTE2ODh9.GPbsl9FLX4VrsGVErodiXypjuz1us4tfD0jwg2_UrzY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "avatar",
+									"type": "file",
+									"src": "/home/ali/Mine/c/nodejs-blog/public/img/blog-header.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/user/me/avatar",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"me",
+								"avatar"
+							]
+						},
+						"description": "Upload image by authenticated user"
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Image",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/user/5ddccbec6b55da001759722c/avatar",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"5ddccbec6b55da001759722c",
+								"avatar"
+							]
+						},
+						"description": "Get user image that has been uploaded"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Image",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZGRiZGQxM2JiMjIzZTEyMjY5NzMxMmEiLCJpYXQiOjE1NzQ2OTY1NzF9.5v32aulIG6tk91_oOehOexSqDst-YgYHGwD803ZSP_I",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/user/me/avatar",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"me",
+								"avatar"
+							]
+						},
+						"description": "Delete user image from database"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZGRiZGQxM2JiMjIzZTEyMjY5NzMxMmEiLCJpYXQiOjE1NzQ2OTY1NzF9.5v32aulIG6tk91_oOehOexSqDst-YgYHGwD803ZSP_I",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/user/me",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"me"
+							]
+						},
+						"description": "Delete and remove user from database"
+					},
+					"response": []
+				}
+			],
+			"description": "User routes with CRUD functionality"
+		},
+		{
+			"name": "Task",
+			"item": [
+				{
+					"name": "Add Task",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZGRjY2JlYzZiNTVkYTAwMTc1OTcyMmMiLCJpYXQiOjE1NzQ3NTE2ODh9.GPbsl9FLX4VrsGVErodiXypjuz1us4tfD0jwg2_UrzY",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"description\": \"reading book\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/task",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"task"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Add a new task and save it to database"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Task",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZGRjY2JlYzZiNTVkYTAwMTc1OTcyMmMiLCJpYXQiOjE1NzQ3NTE2ODh9.GPbsl9FLX4VrsGVErodiXypjuz1us4tfD0jwg2_UrzY",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/task",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"task"
+							]
+						},
+						"description": "Get all task from user"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Task by Id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZGRjY2JlYzZiNTVkYTAwMTc1OTcyMmMiLCJpYXQiOjE1NzQ3NTE2ODh9.GPbsl9FLX4VrsGVErodiXypjuz1us4tfD0jwg2_UrzY",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/task/5ddccf7d6b55da001759722f",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"task",
+								"5ddccf7d6b55da001759722f"
+							]
+						},
+						"description": "Get single task by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Task by Completed",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZGRjY2JlYzZiNTVkYTAwMTc1OTcyMmMiLCJpYXQiOjE1NzQ3NTE2ODh9.GPbsl9FLX4VrsGVErodiXypjuz1us4tfD0jwg2_UrzY",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/task?completed=true",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"task"
+							],
+							"query": [
+								{
+									"key": "completed",
+									"value": "true"
+								}
+							]
+						},
+						"description": "Get all task that is sorted by completion status"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Task by Pagination",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZGRjY2JlYzZiNTVkYTAwMTc1OTcyMmMiLCJpYXQiOjE1NzQ3NTE2ODh9.GPbsl9FLX4VrsGVErodiXypjuz1us4tfD0jwg2_UrzY",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/task?limit=2&skip=10",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"task"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "2"
+								},
+								{
+									"key": "skip",
+									"value": "10"
+								}
+							]
+						},
+						"description": "Get all task by pagination value"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Task by Id",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZGRjY2JlYzZiNTVkYTAwMTc1OTcyMmMiLCJpYXQiOjE1NzQ3NTE2ODh9.GPbsl9FLX4VrsGVErodiXypjuz1us4tfD0jwg2_UrzY",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"completed\": true\n}"
+						},
+						"url": {
+							"raw": "{{url}}/task/5ddcd1566b55da0017597239",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"task",
+								"5ddcd1566b55da0017597239"
+							]
+						},
+						"description": "Update task by ID, user authentication needed"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Task by Id",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZGRjY2JlYzZiNTVkYTAwMTc1OTcyMmMiLCJpYXQiOjE1NzQ3NTE2ODh9.GPbsl9FLX4VrsGVErodiXypjuz1us4tfD0jwg2_UrzY",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/task/5ddcd1566b55da0017597239",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"task",
+								"5ddcd1566b55da0017597239"
+							]
+						},
+						"description": "Delete or removed task from database by ID, user authentication needed"
+					},
+					"response": []
+				}
+			],
+			"description": "Task routes with CRUD functionality"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "4fc48e5f-9ee2-4a8c-84c8-afadd4f41bb0",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "e060b8fc-c022-4765-9d40-2256d69630ee",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
